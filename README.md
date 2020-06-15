@@ -4,12 +4,12 @@ API which returns people who are listed as either living in London, or whose cur
 
 ## Technical Considerations
 
-- API Documentation
+- API Documentation :negative_squared_cross_mark:
 - Caching :white_check_mark:
 - Circuit Breaker :white_check_mark:
 - Docker :white_check_mark:
 - Error Handling :white_check_mark:
-- Logging
-- OWASP
-- Process manager
-- Twelve Factor App
+- Logging :negative_squared_cross_mark:
+- OWASP :negative_squared_cross_mark:
+- Process manager :negative_squared_cross_mark:
+- Twelve Factor App :eight_spoked_asterisk:

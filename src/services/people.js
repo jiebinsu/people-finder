@@ -3,8 +3,7 @@ import timeoutHandler from "../utils/timeout";
 import { getGreatCircleDistanceInMiles } from "../utils/distance";
 import { ServerError } from "../errors/server-error";
 import redis from "./database/redis";
-
-const API_URI = "https://bpdts-test-app.herokuapp.com";
+import { API_URI, REDIS_TTL } from "../config";
 
 export const getPeopleFromCity = async (city) => {
   try {
@@ -15,7 +14,7 @@ export const getPeopleFromCity = async (city) => {
       fetch(`${API_URI}/city/${city}/users`)
     );
     peopleFromLondon = await response.json();
-    redis.set("from.london", JSON.stringify(peopleFromLondon), 3600);
+    redis.set("from.london", JSON.stringify(peopleFromLondon), REDIS_TTL);
 
     return peopleFromLondon;
   } catch (e) {
@@ -49,7 +48,7 @@ export const getPeopleWithinArea = async (
     if (!peopleInLondon) {
       const response = await timeoutHandler(fetch(`${API_URI}/users`));
       peopleInLondon = await response.json();
-      redis.set("in.london", JSON.stringify(peopleInLondon), 3600);
+      redis.set("in.london", JSON.stringify(peopleInLondon), REDIS_TTL);
     } else {
       peopleInLondon = JSON.parse(peopleInLondon);
     }

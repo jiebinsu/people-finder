@@ -1,5 +1,5 @@
 const errorHandler = (err, _, res, next) => {
-  const { message, stack } = err;
+  const { message } = err;
   const status = err.statusCode || err.status || 500;
 
   if (status >= 400) {

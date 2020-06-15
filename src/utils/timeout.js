@@ -1,6 +1,8 @@
+import { DEFAULT_TIMEOUT } from "../config";
+
 export default (
   asyncFunction,
-  timeoutInMs = 350,
+  timeoutInMs = DEFAULT_TIMEOUT,
   errMsg = "Request timed out"
 ) => {
   const timeoutPromise = new Promise((_, reject) => {

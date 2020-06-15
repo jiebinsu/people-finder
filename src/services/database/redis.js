@@ -1,10 +1,11 @@
 import { createClient } from "redis";
 import { promisify } from "util";
+import { REDIS_HOST, REDIS_PORT, REDIS_TTL } from "../../config";
 
 const client = createClient({
-  host: "redis",
-  port: 6379,
-  client: 1,
+  host: REDIS_HOST,
+  port: REDIS_PORT,
+  db: 1,
 });
 
 client.on("connect", function () {
@@ -28,7 +29,7 @@ const get = (key) => {
   }
 };
 
-const set = (key, value, ttl = 3600) => {
+const set = (key, value, ttl = REDIS_TTL) => {
   if (!client.connected) return;
   try {
     redisSet(key, value).then(() => redisExpire(key, ttl));
