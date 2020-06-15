@@ -1,10 +1,8 @@
-import peopleController from "../../src/controllers/people";
-import {
-  getPeopleFromCity,
-  getPeopleWithinArea,
-} from "../../src/services/people";
+import peopleController from "../../controllers/people";
+import { getPeopleFromCity, getPeopleWithinArea } from "../../services/people";
+import redis from "../../services/database/redis";
 
-jest.mock("../../src/services/people");
+jest.mock("../../services/people");
 
 const httpMock = (query) => {
   const req = {};
@@ -22,6 +20,8 @@ const httpMock = (query) => {
 };
 
 describe("peopleController", () => {
+  afterAll(() => redis.shutdown());
+
   it("should return json response with empty array when no people found", async () => {
     const [req, res, next] = httpMock();
     getPeopleFromCity.mockResolvedValue([]);

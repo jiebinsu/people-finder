@@ -2,15 +2,22 @@ import fetch from "node-fetch";
 import timeoutHandler from "../utils/timeout";
 import { getGreatCircleDistanceInMiles } from "../utils/distance";
 import { ServerError } from "../errors/server-error";
+import redis from "./database/redis";
 
 const API_URI = "https://bpdts-test-app.herokuapp.com";
 
 export const getPeopleFromCity = async (city) => {
   try {
+    let peopleFromLondon = await redis.get("from.london");
+    if (!!peopleFromLondon) return JSON.parse(peopleFromLondon);
+
     const response = await timeoutHandler(
       fetch(`${API_URI}/city/${city}/users`)
     );
-    return await response.json();
+    peopleFromLondon = await response.json();
+    redis.set("from.london", JSON.stringify(peopleFromLondon), 3600);
+
+    return peopleFromLondon;
   } catch (e) {
     throw new ServerError("People service is unavailable");
   }
@@ -29,7 +36,6 @@ const isWithinArea = (
     destLat,
     destLon
   );
-
   return distance <= distanceInMiles;
 };
 
@@ -39,10 +45,16 @@ export const getPeopleWithinArea = async (
   distanceInMiles = 50
 ) => {
   try {
-    const response = await timeoutHandler(fetch(`${API_URI}/users`));
-    const people = await response.json();
+    let peopleInLondon = await redis.get("in.london");
+    if (!peopleInLondon) {
+      const response = await timeoutHandler(fetch(`${API_URI}/users`));
+      peopleInLondon = await response.json();
+      redis.set("in.london", JSON.stringify(peopleInLondon), 3600);
+    } else {
+      peopleInLondon = JSON.parse(peopleInLondon);
+    }
 
-    return people.filter((person) =>
+    return peopleInLondon.filter((person) =>
       isWithinArea(lat, lon, person.latitude, person.longitude, distanceInMiles)
     );
   } catch (e) {

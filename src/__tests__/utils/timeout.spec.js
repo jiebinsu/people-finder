@@ -1,4 +1,4 @@
-import timeout from "../../src/utils/timeout";
+import timeout from "../../utils/timeout";
 
 describe("timeoutHandler", () => {
   it("should throw default error if not specified", async () => {

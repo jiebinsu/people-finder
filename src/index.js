@@ -4,6 +4,7 @@ import helmet from "helmet";
 
 import routes from "./routes/v1";
 import errorHandler from "./middlewares/error-handler";
+import "./services/database/redis";
 
 const app = express();
 const APP_PORT = 3000;

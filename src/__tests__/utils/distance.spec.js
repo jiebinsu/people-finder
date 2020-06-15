@@ -1,4 +1,4 @@
-import { getGreatCircleDistanceInMiles } from "../../src/utils/distance";
+import { getGreatCircleDistanceInMiles } from "../../utils/distance";
 
 describe("distance", () => {
   it("given undefined should return falsy", () => {

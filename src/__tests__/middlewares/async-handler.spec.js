@@ -1,4 +1,4 @@
-import asyncHandler from "../../src/middlewares/async-handler";
+import asyncHandler from "../../middlewares/async-handler";
 
 describe("asyncHandler", () => {
   it("should catch exceptions of functions passed into it", async () => {

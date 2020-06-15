@@ -1,5 +1,5 @@
-import errorHandler from "../../src/middlewares/error-handler";
-import { ServerError } from "../../src/errors/server-error";
+import errorHandler from "../../middlewares/error-handler";
+import { ServerError } from "../../errors/server-error";
 
 describe("errorHandler", () => {
   let res;
