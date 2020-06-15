@@ -6,11 +6,10 @@ API which returns people who are listed as either living in London, or whose cur
 
 - API Documentation
 - Caching
-- Circuit Breaker
+- Circuit Breaker :white_check_mark:
 - Docker :white_check_mark:
 - Error Handling :white_check_mark:
 - Logging
 - OWASP
 - Process manager
-- Production-ready API
 - Twelve Factor App

@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import timeoutHandler from "../utils/timeout";
 import { getGreatCircleDistanceInMiles } from "../utils/distance";
 import { ServerError } from "../errors/server-error";
 
@@ -6,7 +7,9 @@ const API_URI = "https://bpdts-test-app.herokuapp.com";
 
 export const getPeopleFromCity = async (city) => {
   try {
-    const response = await fetch(`${API_URI}/city/${city}/users`);
+    const response = await timeoutHandler(
+      fetch(`${API_URI}/city/${city}/users`)
+    );
     return await response.json();
   } catch (e) {
     throw new ServerError("People service is unavailable");
@@ -36,7 +39,7 @@ export const getPeopleWithinArea = async (
   distanceInMiles = 50
 ) => {
   try {
-    const response = await fetch(`${API_URI}/users`);
+    const response = await timeoutHandler(fetch(`${API_URI}/users`));
     const people = await response.json();
 
     return people.filter((person) =>
