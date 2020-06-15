@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf app && babel src -d app",
     "start": "npm run build && node app",
-    "dev": "nodemon --exec npm run restart"
+    "dev": "nodemon --exec npm run restart",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
