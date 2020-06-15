@@ -5,7 +5,7 @@ API which returns people who are listed as either living in London, or whose cur
 ## Technical Considerations
 
 - API Documentation
-- Caching
+- Caching :white_check_mark:
 - Circuit Breaker :white_check_mark:
 - Docker :white_check_mark:
 - Error Handling :white_check_mark:
