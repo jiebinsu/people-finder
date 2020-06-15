@@ -58,7 +58,6 @@ describe("errorHandler", () => {
     expect(console.error).toHaveBeenCalledWith({
       status: 404,
       message: "oops",
-      stack: expect.anything(),
     });
   });
 
