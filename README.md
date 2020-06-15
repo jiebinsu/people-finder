@@ -8,7 +8,7 @@ API which returns people who are listed as either living in London, or whose cur
 - Caching
 - Circuit Breaker
 - Docker :white_check_mark:
-- Error Handling
+- Error Handling :white_check_mark:
 - Logging
 - OWASP
 - Process manager

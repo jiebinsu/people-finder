@@ -3,6 +3,7 @@ import {
   getPeopleFromCity,
   getPeopleWithinArea,
 } from "../../src/services/people";
+import { ServerError } from "../../src/errors/server-error";
 import * as Distance from "../../src/utils/distance";
 
 jest.mock("node-fetch");
@@ -26,7 +27,7 @@ describe("getPeopleFromCity", () => {
     fetch.mockImplementation(() => Promise.reject("test"));
 
     expect(getPeopleFromCity("London")).rejects.toThrow(
-      new Error("People service is unavailable")
+      new ServerError("People service is unavailable")
     );
   });
 });
@@ -78,7 +79,7 @@ describe("getPeopleWithinArea", () => {
     fetch.mockImplementation(() => Promise.reject("test"));
 
     expect(getPeopleWithinArea(londonLat, londonLon, 1)).rejects.toThrow(
-      new Error("People service is unavailable")
+      new ServerError("People service is unavailable")
     );
   });
 

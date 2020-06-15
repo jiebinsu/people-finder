@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import { getGreatCircleDistanceInMiles } from "../utils/distance";
+import { ServerError } from "../errors/server-error";
 
 const API_URI = "https://bpdts-test-app.herokuapp.com";
 
@@ -8,7 +9,7 @@ export const getPeopleFromCity = async (city) => {
     const response = await fetch(`${API_URI}/city/${city}/users`);
     return await response.json();
   } catch (e) {
-    throw new Error("People service is unavailable");
+    throw new ServerError("People service is unavailable");
   }
 };
 
@@ -42,6 +43,6 @@ export const getPeopleWithinArea = async (
       isWithinArea(lat, lon, person.latitude, person.longitude, distanceInMiles)
     );
   } catch (e) {
-    throw new Error("People service is unavailable");
+    throw new ServerError("People service is unavailable");
   }
 };
